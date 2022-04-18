@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -38,12 +39,14 @@ class ProjectController extends Controller
     {
         $project = new Project;
 
-        dd('asd');
         $project->name = $request->name;
-        $project->date_start = date(now());
-        // $project->date_end = null;
+        // $project->date_start = date('Y-m-d H:i:s');
+        $project->date_start = $request->date_start;
+        $project->date_end = $request->date_end;
 
         $project->save();
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -54,7 +57,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $project = Project::find($project);
+        $tasks = Task::where('project_id', $project)->get();
+        return view('projects.show', ['project'=>$project, 'tasks'=>$tasks]);
     }
 
     /**
@@ -65,7 +70,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $project = Project::find($project);
+
+        return view('projects.edit', ['project'=>$project]);
     }
 
     /**
@@ -75,9 +82,17 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+
+        $project->name = $request->name;
+        $project->date_start = $request->date_start;
+        $project->date_end = $request->date_end;
+
+        $project->save();
+
+        return redirect()->route('projects.show', ['project'=>$project]);
     }
 
     /**
@@ -86,8 +101,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project, $id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+        
+        return redirect()->back();
     }
 }

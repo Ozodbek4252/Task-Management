@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('name');
             $table->string('description');
-            $table->date('date_start')->default(null);
-            $table->date('date_end')->default(null);
+            $table->string('date_start')->nullable();
+            $table->string('date_end')->nullable();
             $table->string('project_id');
             $table->boolean('status')->default(False);
             $table->boolean('importance')->default(False);
