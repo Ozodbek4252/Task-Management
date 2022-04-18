@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
-Route::get('/projects/{id}/tasks', [ProjectController::class, 'tasks'])->name('projects.tasks');
-Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
-Route::post('/projects/store', [ProjectController::class, 'store'])->name('projects.store');
+Route::resource([
+    'projects' => ProjectController::class,
+    'tasks' => TaskController::class
+]);
+
+// Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+// Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+// Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+// Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+// Route::get('/projects/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+// Route::put('/projects', [ProjectController::class, 'update'])->name('projects.update');

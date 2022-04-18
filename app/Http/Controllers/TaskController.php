@@ -14,7 +14,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return view('tasks.index', ['tasks'=>$tasks]);
     }
 
     /**
@@ -24,7 +25,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
@@ -35,7 +36,19 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task;
+
+        $task->user_id = $request->user_id;
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->date_start = $request->date_start;
+        $task->date_end = $request->date_end;
+        $task->project_id = $request->project_id;
+        $task->importance = $request->importance;
+
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -46,7 +59,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $task = Task::find($task);
+        return view('tasks.show', ['task'=>$task]);
     }
 
     /**
@@ -57,7 +71,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $task = Task::find($task);
+        return view('tasks.edit', ['task'=>$task]);
     }
 
     /**
@@ -69,7 +84,19 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $task = Task::find($task);
+
+        $task->user_id = $request->user_id;
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->date_start = $request->date_start;
+        $task->date_end = $request->date_end;
+        $task->project_id = $request->project_id;
+        $task->importance = $request->importance;
+
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -80,6 +107,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task = Task::find($task);
+        $task->delete();
+
+        return back();
     }
 }
