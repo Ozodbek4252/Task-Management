@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource([
+Route::resources([
     'projects' => ProjectController::class,
     'tasks' => TaskController::class
 ]);
@@ -31,3 +31,13 @@ Route::resource([
 // Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 // Route::get('/projects/edit', [ProjectController::class, 'edit'])->name('projects.edit');
 // Route::put('/projects', [ProjectController::class, 'update'])->name('projects.update');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
