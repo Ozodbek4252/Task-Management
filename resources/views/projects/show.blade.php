@@ -1,4 +1,5 @@
 <x-app-layout>
+<<<<<<< HEAD
     <style>
         .deadline{
             float: right;
@@ -231,4 +232,7 @@
         </div>
 
     </div>
+=======
+
+>>>>>>> 023290ea60de5d128f26aca73c5ce975cd673fdd
 </x-app-layout>
