@@ -1,7 +1,5 @@
 <x-app-layout>
-    <div class="main-content">
 
-        <div class="page-content">
             <div class="container-fluid">
 
                 <!-- start page title -->
@@ -248,9 +246,6 @@
                     </div> <!-- end Col -->
                 </div> <!-- end row-->
 
-            </div> <!-- container-fluid -->
-        </div>
-        <!-- End Page-content -->
 
 
         <footer class="footer">
