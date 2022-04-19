@@ -12,6 +12,9 @@
         .fix{
             margin-left: 5px;
         }
+        .project{
+            border-radius: 5px;
+        }
     </style>
     <div class="container-fluid">
 
@@ -41,7 +44,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-grid">
-                                    <button class="btn font-16 btn-primary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"><i class="mdi mdi-plus-circle-outline"></i> Create New Projects</button>
+                                    <button class="btn font-16 btn-primary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center">
+                                        <i class="mdi mdi-plus-circle-outline"></i>
+                                        Create New Projects
+                                    </button>
                                 </div>
                                 <div class="modal fade bs-example-modal-center" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-modal="true" role="dialog">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -72,42 +78,42 @@
                                 <div id="external-events" class="mt-2">
                                     <br>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-danger" data-class="bg-danger">
+                                        <div class="project external-event  bg-danger" data-class="bg-danger">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 1<span class="deadline"><i class="uil-bolt-alt"></i>today<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-danger" data-class="bg-danger">
+                                        <div class="project external-event bg-danger mt-2" data-class="bg-danger">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 2<span class="deadline"><i class="uil-bolt-alt"></i>2 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-danger" data-class="bg-danger">
+                                        <div class="project external-event bg-danger mt-2" data-class="bg-danger">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 3<span class="deadline"><i class="uil-bolt-alt"></i>5 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-warning" data-class="bg-warning">
+                                        <div class="project external-event bg-warning mt-2" data-class="bg-warning">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 4<span class="deadline"<i class="bx bx-error"></i><i class="bx bx-error"></i></i>7 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-warning" data-class="bg-warning">
+                                        <div class="project external-event bg-warning mt-2" data-class="bg-warning">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 5<span class="deadline"><i class="bx bx-error"></i>14 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-success" data-class="bg-success">
+                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 6<span class="deadline"><i class="bx bx-coffee"></i>16 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-success" data-class="bg-success">
+                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 7<span class="deadline"><i class="bx bx-coffee"></i>18 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
                                     <a href="/">
-                                        <div class="external-event fc-event bg-success" data-class="bg-success">
+                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 8<span class="deadline"><i class="bx bx-coffee"></i>21 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
@@ -133,10 +139,37 @@
                         <div class="card">
                             <div class="card-body">
                                     <div class="btn-toolbar p-3" role="toolbar">
-                                        <div class="btn-group me-2 mb-2 mb-sm-0">
-                                            <button type="button" class="btn btn-success waves-light waves-effect">Add task</button>
-                                            <button type="button" class="btn btn-warning waves-light waves-effect">Completed tasks</button>
-                                            <button type="button" class="btn btn-danger waves-light waves-effect">Deleted tasks</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success waves-light waves-effect" data-bs-toggle="modal" data-bs-target=".bs-example-modal-centertask"><i class="mdi mdi-plus-circle-outline"></i>Add task</button>
+                                            {{--<button type="button" class="btn btn-warning waves-light waves-effect">Completed tasks</button>--}}
+                                            <button type="button" class="btn btn-warning waves-light waves-effect"><i class="uil-check-circle"></i>Completed tasks</button>
+                                        </div>
+                                        <div class="modal fade bs-example-modal-centertask" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-modal="true" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"> Add task</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Task</label>
+                                                            <input type="text" class="form-control" id="formrow-firstname-input" name="name">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">From</label>
+                                                                <input type="date" class="form-control" id="formrow-firstname-input" name="name">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">to</label>
+                                                                <input type="date" class="form-control" id="formrow-firstname-input" name="name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
                                         </div>
                                         {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
                                             {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
@@ -190,10 +223,52 @@
                                                                     <td>26 May, 2020 - 27 May, 2020</td>
                                                                     <td style="width: 160px;">
                                                                         <button class="btn btn-success"><i class="bx bx-check"></i></button>
-                                                                        <button class="btn btn-warning"><i class="uil-pen"></i></button>
-                                                                        <button class="btn btn-danger"><i class="uil-trash"></i></button>
+                                                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center{{ $i }}create"><i class="uil-pen"></i></button>
+                                                                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center{{ $i }}delete"><i class="uil-trash"></i></button>
                                                                     </td>
                                                                 </tr>
+                                                                <div class="modal fade bs-example-modal-center{{ $i }}create" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-modal="true" role="dialog">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" style="font-weight: bold"> Update {{ $i+1 }} task</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Task</label>
+                                                                                    <input type="text" class="form-control" id="formrow-firstname-input" name="name">
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">From</label>
+                                                                                        <input type="date" class="form-control" id="formrow-firstname-input" name="name">
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">to</label>
+                                                                                        <input type="date" class="form-control" id="formrow-firstname-input" name="name">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div><!-- /.modal-content -->
+                                                                    </div><!-- /.modal-dialog -->
+                                                                </div>
+                                                                <div class="modal fade bs-example-modal-center{{ $i }}delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-modal="true" role="dialog">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h3 class="modal-title" style="font-weight: bold; text-align: center"> Delete {{ $i+1 }} task ?</h3>
+                                                                            </div>
+                                                                            <div class="modal-body text-center">
+                                                                                    <button class="btn btn-danger"><i class="uil-trash"></i>yes</button>
+                                                                                    <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">cancel</button>
+                                                                            </div>
+                                                                        </div><!-- /.modal-content -->
+                                                                    </div><!-- /.modal-dialog -->
+                                                                </div>
+
+
                                                                 {{--<tr>--}}
                                                                     {{--<td>--}}
                                                                         {{--<div class="form-check font-size-16 text-center">--}}
