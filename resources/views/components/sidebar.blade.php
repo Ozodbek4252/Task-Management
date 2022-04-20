@@ -44,12 +44,12 @@
               <li class="menu-title">Apps</li>
 
               <li>
-                  <a href="{{ route('projects.index') }}" class="waves-effect">
+                  <a href="{{ route('projects') }}" class="waves-effect">
                       <i class="bx bx-bar-chart-square"></i> Projects
                   </a>
               </li>
               <li>
-                  <a href="{{ route('tasks.index') }}" class="waves-effect">
+                  <a href="{{ route('tasks') }}" class="waves-effect">
                       <i class="bx bx-task"></i> Tasks
                   </a>
               </li>

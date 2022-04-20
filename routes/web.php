@@ -24,17 +24,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resources([
-    'projects' => ProjectController::class,
-    'tasks' => TaskController::class
-]);
+Route::get('/projects', \App\Http\Livewire\ProjectComponent::class)->name('projects');
+Route::get('/tasks', \App\Http\Livewire\ProjectComponent::class)->name('tasks');
 
-// Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-// Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
-// Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
-// Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
-// Route::get('/projects/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-// Route::put('/projects', [ProjectController::class, 'update'])->name('projects.update');
+// Route::resources([
+//     'projects' => ProjectController::class,
+//     'tasks' => TaskController::class
+// ]);
+
 
 Route::middleware([
     'auth:sanctum',

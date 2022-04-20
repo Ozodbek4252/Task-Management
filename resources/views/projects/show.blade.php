@@ -1,5 +1,4 @@
 <x-app-layout>
-<<<<<<< HEAD
     <style>
         .deadline{
             float: right;
@@ -15,24 +14,6 @@
         }
     </style>
     <div class="container-fluid">
-
-        <!-- start page title -->
-    {{--<div class="row">--}}
-    {{--<div class="col-12">--}}
-    {{--<div class="page-title-box d-flex align-items-center justify-content-between">--}}
-    {{--<h4 class="mb-0">Calendar</h4>--}}
-
-    {{--<div class="page-title-right">--}}
-    {{--<ol class="breadcrumb m-0">--}}
-    {{--<li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>--}}
-    {{--<li class="breadcrumb-item active">Calendar</li>--}}
-    {{--</ol>--}}
-    {{--</div>--}}
-
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    <!-- end page title -->
 
         <div class="row">
             <div class="col-12">
@@ -113,19 +94,6 @@
                                         </div>
                                     </a>
                                 </div>
-
-                                {{--<ol class="activity-feed mb-0 ps-2 mt-4 ms-1">--}}
-                                {{--<li class="feed-item">--}}
-                                {{--<p class="mb-0">Andrei Coman magna sed porta finibus, risus--}}
-                                {{--posted a new article: Forget UX Rowland</p>--}}
-                                {{--</li>--}}
-                                {{--<li class="feed-item">--}}
-                                {{--<p class="mb-0">Zack Wetass, sed porta finibus, risus Chris Wallace Commented Developer Moreno</p>--}}
-                                {{--</li>--}}
-                                {{--<li class="feed-item">--}}
-                                {{--<p class="mb-0">Zack Wetass, Chris combined Commented UX Murphy</p>--}}
-                                {{--</li>--}}
-                                {{--</ol>--}}
                             </div>
                         </div>
                     </div> <!-- end col-->
@@ -139,39 +107,7 @@
                                         <button type="button" class="btn btn-warning waves-light waves-effect">Completed tasks</button>
                                         <button type="button" class="btn btn-danger waves-light waves-effect">Deleted tasks</button>
                                     </div>
-                                    {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                    {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                    {{--<i class="fa fa-folder"></i> <i class="mdi mdi-chevron-down ms-1"></i>--}}
-                                    {{--</button>--}}
-                                    {{--<div class="dropdown-menu">--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Updates</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Social</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Team Manage</a>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                    {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                    {{--<i class="fa fa-tag"></i> <i class="mdi mdi-chevron-down ms-1"></i>--}}
-                                    {{--</button>--}}
-                                    {{--<div class="dropdown-menu">--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Updates</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Social</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Team Manage</a>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                    {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                    {{--More <i class="mdi mdi-dots-vertical ms-2"></i>--}}
-                                    {{--</button>--}}
-                                    {{--<div class="dropdown-menu">--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Mark as Unread</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Mark as Important</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Add to Tasks</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Add Star</a>--}}
-                                    {{--<a class="dropdown-item" href="email-inbox.html#">Mute</a>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
+                                    
                                 </div>
                                 <h4 style="text-align: center">Project 1</h4>
                                 <ul class="message-list">
@@ -195,19 +131,6 @@
                                                                 <button class="btn btn-danger"><i class="uil-trash"></i></button>
                                                             </td>
                                                         </tr>
-                                                        {{--<tr>--}}
-                                                        {{--<td>--}}
-                                                        {{--<div class="form-check font-size-16 text-center">--}}
-                                                        {{--<input type="checkbox" class="form-check-input" id="tasks-activeCheck1">--}}
-                                                        {{--<label class="form-check-label" for="tasks-activeCheck1"></label>--}}
-                                                        {{--</div>--}}
-                                                        {{--</td>--}}
-                                                        {{--<td>--}}
-                                                        {{--<a href="contacts-profile.html#" class="fw-bold text-dark">Ecommerce Product</a>--}}
-                                                        {{--</td>--}}
-                                                        {{--<td>26 May, 2020</td>--}}
-                                                        {{--<td><span class="badge bg-soft-secondary font-size-12">Waiting</span></td>--}}
-                                                        {{--</tr>--}}
                                                     @endfor
                                                     </tbody>
                                                 </table>
@@ -224,15 +147,8 @@
                 <div style="clear:both"></div>
 
 
-                <!-- Add New Event MODAL -->
-
-                <!-- end modal-->
-
             </div>
         </div>
 
     </div>
-=======
-
->>>>>>> 023290ea60de5d128f26aca73c5ce975cd673fdd
 </x-app-layout>

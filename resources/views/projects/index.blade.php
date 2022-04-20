@@ -18,31 +18,15 @@
     </style>
     <div class="container-fluid">
 
-        <!-- start page title -->
-        {{--<div class="row">--}}
-            {{--<div class="col-12">--}}
-                {{--<div class="page-title-box d-flex align-items-center justify-content-between">--}}
-                    {{--<h4 class="mb-0">Calendar</h4>--}}
-
-                    {{--<div class="page-title-right">--}}
-                        {{--<ol class="breadcrumb m-0">--}}
-                            {{--<li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>--}}
-                            {{--<li class="breadcrumb-item active">Calendar</li>--}}
-                        {{--</ol>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        <!-- end page title -->
-
         <div class="row">
             <div class="col-12">
 
                 <div class="row">
+                    
                     <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
+                                {{-- Add Projects --}}
                                 <div class="d-grid">
                                     <button class="btn font-16 btn-primary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center">
                                         <i class="mdi mdi-plus-circle-outline"></i>
@@ -58,79 +42,47 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Add project</label>
-                                                    <input type="text" class="form-control" id="formrow-firstname-input" name="name">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Select deadline</label>
-                                                    <input type="date" class="form-control" id="formrow-firstname-input" name="name">
-                                                </div>
+                                                <form action="{{ route('projects.store') }}" method="post">
+                                                    @csrf
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Add project</label>
+                                                        <input type="text" class="form-control" id="formrow-firstname-input" name="project_name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="formrow-firstname-input" style="font-weight: bold">Select deadline</label>
+                                                        <input type="date" class="form-control" id="formrow-firstname-input" name="project_deadline">
+                                                    </div>
+                                                    <button style="submit" class="btn btn-success">Add</button>
+                                                </form>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div>
+                                {{-- Add Projects End --}}
 
                                 <div class="row justify-content-center mt-5">
                                     <img src="assets/images/coming-soon-img.png" alt="" class="img-fluid d-block">
                                 </div>
 
                                 <div id="external-events" class="mt-2">
+                                    <?php 
+                                        $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                                    ?>
+                                    @for($i = 0; $i<count($projects); $i++)
+                                    <?php 
+                                        if($i >= count($colors)){
+                                            array_push($colors, current(array_slice($colors, $i-7, $i-6)));
+                                        }
+                                        
+                                    ?>
                                     <br>
-                                    <a href="/">
-                                        <div class="project external-event  bg-danger" data-class="bg-danger">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 1<span class="deadline"><i class="uil-bolt-alt"></i>today<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
+                                    <a href="{{ route('projects.showw') }}">
+                                        <div class="project external-event  bg-{{$colors[$i]}}" data-class="bg-danger">
+                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2 text-white"></i>{{$projects[$i]->name}}<span class="deadline"><i class="bx bx-coffee"></i>{{$projects[$i]->date_end}}<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-danger mt-2" data-class="bg-danger">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 2<span class="deadline"><i class="uil-bolt-alt"></i>2 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-danger mt-2" data-class="bg-danger">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 3<span class="deadline"><i class="uil-bolt-alt"></i>5 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-warning mt-2" data-class="bg-warning">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 4<span class="deadline"<i class="bx bx-error"></i><i class="bx bx-error"></i></i>7 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-warning mt-2" data-class="bg-warning">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 5<span class="deadline"><i class="bx bx-error"></i>14 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 6<span class="deadline"><i class="bx bx-coffee"></i>16 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 7<span class="deadline"><i class="bx bx-coffee"></i>18 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="project external-event bg-success mt-2" data-class="bg-success">
-                                            <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Projects 8<span class="deadline"><i class="bx bx-coffee"></i>21 days<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
-                                        </div>
-                                    </a>
+                                    @endfor
                                 </div>
-
-                                {{--<ol class="activity-feed mb-0 ps-2 mt-4 ms-1">--}}
-                                    {{--<li class="feed-item">--}}
-                                        {{--<p class="mb-0">Andrei Coman magna sed porta finibus, risus--}}
-                                            {{--posted a new article: Forget UX Rowland</p>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="feed-item">--}}
-                                        {{--<p class="mb-0">Zack Wetass, sed porta finibus, risus Chris Wallace Commented Developer Moreno</p>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="feed-item">--}}
-                                        {{--<p class="mb-0">Zack Wetass, Chris combined Commented UX Murphy</p>--}}
-                                    {{--</li>--}}
-                                {{--</ol>--}}
                             </div>
                         </div>
                     </div> <!-- end col-->
@@ -171,39 +123,6 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div>
-                                        {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                            {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                                {{--<i class="fa fa-folder"></i> <i class="mdi mdi-chevron-down ms-1"></i>--}}
-                                            {{--</button>--}}
-                                            {{--<div class="dropdown-menu">--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Updates</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Social</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Team Manage</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                            {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                                {{--<i class="fa fa-tag"></i> <i class="mdi mdi-chevron-down ms-1"></i>--}}
-                                            {{--</button>--}}
-                                            {{--<div class="dropdown-menu">--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Updates</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Social</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Team Manage</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-
-                                        {{--<div class="btn-group me-2 mb-2 mb-sm-0">--}}
-                                            {{--<button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                                                {{--More <i class="mdi mdi-dots-vertical ms-2"></i>--}}
-                                            {{--</button>--}}
-                                            {{--<div class="dropdown-menu">--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Mark as Unread</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Mark as Important</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Add to Tasks</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Add Star</a>--}}
-                                                {{--<a class="dropdown-item" href="email-inbox.html#">Mute</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
                                     </div>
                                 <h4 style="text-align: center">Project 1</h4>
                                     <ul class="message-list">
@@ -267,21 +186,6 @@
                                                                         </div><!-- /.modal-content -->
                                                                     </div><!-- /.modal-dialog -->
                                                                 </div>
-
-
-                                                                {{--<tr>--}}
-                                                                    {{--<td>--}}
-                                                                        {{--<div class="form-check font-size-16 text-center">--}}
-                                                                            {{--<input type="checkbox" class="form-check-input" id="tasks-activeCheck1">--}}
-                                                                            {{--<label class="form-check-label" for="tasks-activeCheck1"></label>--}}
-                                                                        {{--</div>--}}
-                                                                    {{--</td>--}}
-                                                                    {{--<td>--}}
-                                                                        {{--<a href="contacts-profile.html#" class="fw-bold text-dark">Ecommerce Product</a>--}}
-                                                                    {{--</td>--}}
-                                                                    {{--<td>26 May, 2020</td>--}}
-                                                                    {{--<td><span class="badge bg-soft-secondary font-size-12">Waiting</span></td>--}}
-                                                                {{--</tr>--}}
                                                             @endfor
                                                             </tbody>
                                                         </table>

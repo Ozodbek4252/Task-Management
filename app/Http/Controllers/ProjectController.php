@@ -39,10 +39,10 @@ class ProjectController extends Controller
     {
         $project = new Project;
 
-        $project->name = $request->name;
-        // $project->date_start = date('Y-m-d H:i:s');
-        $project->date_start = $request->date_start;
-        $project->date_end = $request->date_end;
+        $project->name = $request->project_name;
+        $project->date_start = date('Y-m-d H:i:s');
+        // $project->date_start = $request->date_start;
+        $project->date_end = $request->project_deadline;
 
         $project->save();
 
