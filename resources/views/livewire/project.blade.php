@@ -65,12 +65,11 @@
                                         </div>
                                     </form>
                                 </div>
-
                                 {{-- Add Projects End --}}
 
-                                <div class="row justify-content-center mt-5">
+                                {{-- <div class="row justify-content-center mt-5">
                                     <img src="assets/images/coming-soon-img.png" alt="" class="img-fluid d-block">
-                                </div>
+                                </div> --}}
 
                                 <div id="external-events" class="mt-2">
                                     <?php 
