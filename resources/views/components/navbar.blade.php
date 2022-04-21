@@ -249,12 +249,12 @@
                   <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-end">
-                  <!-- item-->
-                  <a class="dropdown-item" href="index.html#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
-                  <a class="dropdown-item" href="index.html#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">My Wallet</span></a>
-                  <a class="dropdown-item d-block" href="index.html#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Settings</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
-                  <a class="dropdown-item" href="index.html#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock screen</span></a>
-                  <form action="{{route('logout')}}" method="POST">
+                <!-- item-->
+                <a class="dropdown-item" href="index.html#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
+                <a class="dropdown-item" href="index.html#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">My Wallet</span></a>
+                <a class="dropdown-item d-block" href="index.html#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Settings</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
+                <a class="dropdown-item" href="index.html#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock screen</span></a>
+                <form action="{{route('logout')}}" method="POST">
                     @csrf  
                     
                     <button class="dropdown-item" type=""><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></button>

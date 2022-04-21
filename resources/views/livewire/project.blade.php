@@ -85,7 +85,7 @@
                                     ?>
                                     <br>
                                     <div wire:click="goToTasks({{$projects[$i]->id}})" style="cursor: pointer; ">
-                                        <div class="project external-event  bg-{{$colors[$i]}}" data-class="bg-danger" style="{{$activeProject == $projects[$i]->id ? 'background-color: rgb(187 247 208); box-shadow: 0 2px 8px 0 rgba(10, 10, 10, 10), 0 1px 2px 0 rgba(0, 0, 0, 0.06); ' : ''}};" >
+                                        <div class="project external-event  bg-{{$colors[$i]}} text-white" data-class="bg-danger" style="{{$activeProject == $projects[$i]->id ? 'background-color: rgb(187 247 208); box-shadow: 0 2px 8px 0 rgba(10, 10, 10, 10), 0 1px 2px 0 rgba(0, 0, 0, 0.06); ' : ''}};" >
                                             <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2 text-white"></i>{{$projects[$i]->name}}<span class="deadline"><i class="bx bx-coffee"></i>{{$projects[$i]->date_end}}<input class="form-check-input fix" type="checkbox" id="autoSizingCheck2"></span>
                                         </div>
                                     </div>
@@ -115,6 +115,7 @@
                                 {{-- Add Task --}}
                                 <div class="btn-toolbar p-3" role="toolbar">
                                     <form style=" display: flex;  align-items: end;" wire:submit.prevent="addTask">
+                                        @csrf
                                         <div class="mb-3 mr-2">
                                             <label class="form-label" for="task-name" style="font-weight: bold">Task Name</label>
                                             <input wire:model.debounce.500ms="taskName" type="text" class="form-control" id="task-name" placeholder="Task name ...">
@@ -129,8 +130,8 @@
                                         </div>
                                         <div class="mb-3 mr-2">
                                             <label class="form-label" for="" style="font-weight: bold">Select User</label>
-                                            <select wire.model="taskDoer" name="taskDoer" id="taskDoer" class="form-control select2">
-                                                <option>Select</option>
+                                            <select wire:model="taskDoer" name="taskDoer" id="taskDoer" name="taskDoer" class="form-control select2">
+                                                <option value="0">Select</option>
                                                 @foreach($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                                 @endforeach
@@ -149,8 +150,17 @@
                                                     <div class="table-responsive">
                                                         <table class="table table-nowrap table-centered">
                                                             @if($activeProject)
-                                                            <div style="display: flex; align-items: center;"><h3>{{$activeProjectData->name}} | </h3><span class="ml-2">{{ (strtotime($activeProjectData->date_end)-strtotime($activeProjectData->date_start))/86400 }} days left</span></div>
+                                                            <?php 
 
+                                                            ?>
+                                                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center;">
+                                                                <div style="display: flex; align-items: center;"><h3>{{$activeProjectData->name}} | </h3><span class="ml-2">{{ (strtotime($activeProjectData->date_end)-strtotime($activeProjectData->date_start))/86400 }} days left</span></div>
+                                                                <div style="width: 150px;">
+                                                                    <span wire:click="completeProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
+                                                                    <span wire:click="editProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
+                                                                    <span wire:click="deleteProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
+                                                                </div>
+                                                            </div>
                                                             @else
                                                             <h3>All Tasks</h3>
                                                             @endif
@@ -165,10 +175,12 @@
                                                                                 <a href="" class="fw-bold text-dark">{{ $activeProjectData->tasks[$i]->name }} <span class="badge bg-soft-secondary font-size-12">Waiting</span></a>
                                                                             </td>
                                                                             <td>{{$activeProjectData->tasks[$i]->date_start}} - {{$activeProjectData->tasks[$i]->date_end}}</td>
+                                                                            <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
+                                                                            <td style="color: #0be07d">@if($activeProjectData->tasks[$i]->status == 1) Completed <i class="bx bx-check"></i>@endif</td>
                                                                             <td style="width: 160px;">
                                                                                 <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
                                                                                 <span wire:click="editTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
-                                                                                <span wire:click="deleteTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center{{ $i }}delete"><i class="uil-trash"></i></button></span>
+                                                                                <span wire:click="deleteTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                             </td>
                                                                         </tr>
                                                                         
@@ -197,10 +209,11 @@
                                                                                 <a href="" class="fw-bold text-dark">{{ $tasks[$i]->name }} <span class="badge bg-soft-secondary font-size-12">Waiting</span></a>
                                                                             </td>
                                                                             <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
+                                                                            <td style="color: #0be07d">@if($tasks[$i]->status == 1) Completed <i class="bx bx-check"></i>@endif</td>
                                                                             <td style="width: 160px;">
                                                                                 <span wire:click="completeTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
                                                                                 <span wire:click="editTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
-                                                                                <span wire:click="deleteTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center{{ $i }}delete"><i class="uil-trash"></i></button></span>
+                                                                                <span wire:click="deleteTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                             </td>
                                                                         </tr>
                                                                         

@@ -4,6 +4,7 @@
     @include('components.styles')
     @livewireStyles
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="font-sans antialiased">
     
@@ -16,9 +17,9 @@
             </div>
         </div>
     </div>
-
+    
     <div class="rightbar-overlay"></div>
-
+    
     @stack('modals')
     @include('components.scripts')
     @livewireScripts
