@@ -78,13 +78,23 @@ class ProjectComponent extends Component
         $task = Task::find($id);
         $task->delete();
         $this->activeProjectData = Project::find($task->project_id);
-        session()->flash('tasks','Task deleted successfully.');
+//        session()->flash('tasks','Task deleted successfully.');
         
     }
     
     public function completeTask($id){
-        Task::find($id)->update(['status'=>1]);
-        session()->flash('tasks','Task completed successfully.');
+        $task = Task::find($id);
+        if($task->status == 0){
+            Task::find($id)->update([
+                'status'=>1
+            ]);
+//            session()->flash('tasks','Task completed successfully.');
+        }else{
+            Task::find($id)->update([
+                'status'=>0
+            ]);
+        }
+        $this->activeProjectData = Project::find($task->project_id);
     }
 
     public function addProject(){
@@ -125,6 +135,31 @@ class ProjectComponent extends Component
         $this->button = 'Add task';
         $this->updateTaskId = null;
         session()->flash('project','Project deleted successfully.');
+    }
+    public function importanceTask($id){
+        $task = Task::find($id);
+        if(Task::find($id)->importance == 1){
+            Task::find($id)->update([
+                'importance' => 0
+            ]);
+        }else{
+            Task::find($id)->update([
+                'importance' => 1
+            ]);
+        }
+        $this->activeProjectData = Project::find($task->project_id);
+    }
+    public function importanceProject($id){
+        if(Project::find($id)->importance == 1){
+            Project::find($id)->update([
+                'importance' => 0
+            ]);
+        }else{
+            Project::find($id)->update([
+                'importance' => 1
+            ]);
+        }
+        $this->mount();
     }
 
     public function goToTasks($projectId){
