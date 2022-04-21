@@ -112,6 +112,7 @@
                         <div class="card">
                             <div class="card-body">
                                 {{-- Add Task --}}
+                                @if($activeProject)
                                 <div class="btn-toolbar p-3" role="toolbar">
                                     <form style=" display: flex;  align-items: end;" wire:submit.prevent="addTask">
                                         @csrf
@@ -141,6 +142,7 @@
                                         </div>
                                     </form>
                                 </div>
+                                @endif
                                 {{-- Add Task End --}}
                                 <h4 style="text-align: center"></h4>
                                     <ul class="message-list">
