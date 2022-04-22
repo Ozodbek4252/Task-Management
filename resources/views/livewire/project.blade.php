@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-3 col-12" style="text-align: center">
-                                                <button wire:click="addProject()" type="button" class="btn btn-success waves-light waves-effect">Add</button>
+                                                <button wire:click="addProject()" type="button" class="btn btn-success waves-light waves-effect">{{$buttonProject}}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -93,7 +93,7 @@
                                                             @else
                                                                 <i class="bx bx-coffee"></i>
                                                             @endif
-                                                            {{ $day_left }} days left
+                                                            @if($day_left>0) {{ $day_left }} days left @elseif($day_left==0) today @else {{ -$day_left }} days passed @endif
                                                                 <button wire:click = "importanceProject({{ $projects[$i]->id }})" @if($projects[$i]->importance == 1) style="color: black;" @endif><i class="bx bx-pin"></i></button>
                                                         </span>
                                                     </div>
@@ -119,7 +119,7 @@
                                                             @else
                                                                 <i class="bx bx-coffee"></i>
                                                             @endif
-                                                            {{ $day_left }} days left
+                                                            @if($day_left>0) {{ $day_left }} days left @elseif($day_left==0) today @else {{ -$day_left }} days passed @endif
                                                                 <button wire:click = "importanceProject({{ $projects[$i]->id }})" @if($projects[$i]->importance == 1) style="color: black;" @endif><i class="bx bx-pin"></i></button>
                                                         </span>
                                                     </div>
@@ -190,7 +190,13 @@
                                                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center;">
                                                                 <div style="display: flex; align-items: center;">
                                                                     <h3>{{$activeProjectData->name}} | </h3>
-                                                                    <span class="ml-2">{{ round((strtotime($activeProjectData->date_end) - time())/86400) }} days left</span></div>
+                                                                    <span class="ml-2">
+                                                                        <?php 
+                                                                            $days_left = round((strtotime($activeProjectData->date_end) - time())/86400);
+                                                                            ?>
+                                                                        @if($days_left>0) {{ $days_left }} days left @elseif($days_left==0) today @else {{ -$days_left }} days passed @endif
+                                                                    </span>
+                                                                </div>
                                                                 <div style="width: 150px;">
                                                                     <span wire:click="completeProject({{$activeProjectData->id}})" class="mr-1">
                                                                         <button class="btn btn-rounded btn-success">
@@ -221,13 +227,13 @@
                                                                                         @if($activeProjectData->tasks[$i]->status == 1)
                                                                                             <span class="badge bg-soft-success font-size-12">Completed</span>
                                                                                         @else
-                                                                                            <span class="badge bg-soft-secondary font-size-12">Waiting </span>
+                                                                                            <span class="badge bg-soft-secondary font-size-12">Progressing </span>
                                                                                         @endif
                                                                                     </a>
                                                                                 </td>
 
-                                                                                <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
-                                                                                <td>{{$tasks[$i]->date_start}} - {{ $tasks[$i]->date_end }}</td>
+                                                                                <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($activeProjectData->tasks[$i]->user_id)->name }}</td>
+                                                                                <td>{{$activeProjectData->tasks[$i]->date_start}} - {{ $activeProjectData->tasks[$i]->date_end }}</td>
                                                                                 <td style="width: 160px;">
                                                                                     <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1">
                                                                                         <button class="btn btn-success">
@@ -255,13 +261,13 @@
                                                                                         @if($activeProjectData->tasks[$i]->status == 1)
                                                                                             <span class="badge bg-soft-success font-size-12">Completed</span>
                                                                                         @else
-                                                                                            <span class="badge bg-soft-secondary font-size-12">Waiting </span>
+                                                                                            <span class="badge bg-soft-secondary font-size-12">Progressing </span>
                                                                                         @endif
                                                                                     </a>
                                                                                 </td>
 
-                                                                                <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
-                                                                                <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
+                                                                                <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($activeProjectData->tasks[$i]->user_id)->name }}</td>
+                                                                                <td>{{$activeProjectData->tasks[$i]->date_start}} - {{ $activeProjectData->tasks[$i]->date_end }}</td>
                                                                                 <td style="width: 160px;">
                                                                                     <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1">
                                                                                         <button class="btn btn-success">
@@ -289,7 +295,7 @@
                                                                                         @if($tasks[$i]->status == 1)
                                                                                             <span class="badge bg-soft-success font-size-12">Completed</span>
                                                                                         @else
-                                                                                            <span class="badge bg-soft-secondary font-size-12">Waiting </span>
+                                                                                            <span class="badge bg-soft-secondary font-size-12">Progressing </span>
                                                                                         @endif
                                                                                     </a>
                                                                                 </td>
@@ -322,7 +328,7 @@
                                                                                         @if($tasks[$i]->status == 1)
                                                                                             <span class="badge bg-soft-success font-size-12">Completed</span>
                                                                                         @else
-                                                                                            <span class="badge bg-soft-secondary font-size-12">Waiting </span>
+                                                                                            <span class="badge bg-soft-secondary font-size-12">Progressing </span>
                                                                                         @endif
                                                                                     </a>
                                                                                 </td>

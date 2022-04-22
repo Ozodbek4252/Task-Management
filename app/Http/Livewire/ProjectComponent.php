@@ -12,9 +12,10 @@ class ProjectComponent extends Component
 
     protected $listeners = ['refresh'];
 
-    public  $users, $button = 'Add task', $projects = [], $tasks = [], $taskEnd, $taskStart, $taskName, 
+    public  $users, $button = 'Add task', $buttonProject = 'Add Project', $projects = [], $tasks = [], $taskEnd, $taskStart, $taskName, 
             $taskNameEdit, $taskStartEdit, $taskEndEdit, $taskDoerEdit, $activeProject, $projectName, 
-            $projectStart, $projectEnd, $taskDoer, $activeProjectData, $updateTaskId, $projectId;
+            $projectStart, $projectEnd, $taskDoer, $activeProjectData, $updateTaskId, $projectId,
+            $updateProjectId = 0;
 
     public function mount(){
         $this->users = User::all();
@@ -68,11 +69,11 @@ class ProjectComponent extends Component
             $this->button = 'Add task';
             $this->updateTaskId = null;
         }
+        session()->flash('tasks','Task added successfully.');
 
         $this->taskName = '';
         $this->button = 'Add task';
         
-        session()->flash('tasks','Task added successfully.');
         $this->activeProjectData = Project::find($task->project_id);
     }
 
@@ -100,7 +101,7 @@ class ProjectComponent extends Component
             Task::find($id)->update([
                 'status'=>1
             ]);
-//            session()->flash('tasks','Task completed successfully.');
+            session()->flash('tasks','Task completed successfully.');
         }else{
             Task::find($id)->update([
                 'status'=>0
@@ -112,16 +113,22 @@ class ProjectComponent extends Component
     public function addProject(){
         $this->validate(['projectName' => 'required|max:25']);
 
-        $createdComment = Project::create([
+        $createdComment = Project::updateOrCreate(['id'=>$this->updateProjectId],[
             'name'=>$this->projectName,
             'date_start'=>$this->projectStart,
             'date_end'=>$this->projectEnd,
         ]);
 
         $this->projectName = '';
+        $this->projectStart = '';
+        $this->projectEnd = '';
         $this->mount();
-
-        session()->flash('project','Project added successfully.');
+        $this->buttonProject = 'Add Project';
+        if($this->updateProjectId==0){
+            session()->flash('project','Project added successfully.');
+        }else{
+            session()->flash('project','Project updated successfully.');
+        }
     }
 
     public function completeProject($id){
@@ -133,17 +140,18 @@ class ProjectComponent extends Component
             Project::find($id)->update([
                 'status'=>1
             ]);
+            session()->flash('project','Project completed successfully.');
         }
         $this->activeProjectData = Project::find($id);
-//            session()->flash('project','Project completed successfully.');
     }
 
-    // public function editProject($id){
-    //     $this->projectName = Project::find($id)->name;
-    //     $this->projectStart = Project::find($id)->date_start;
-    //     $this->projectEnd = Project::find($id)->date_end;
-    //     $this->projectId = $id;
-    // }
+    public function editProject($id){
+        $this->projectName = Project::find($id)->name;
+        $this->projectStart = Project::find($id)->date_start;
+        $this->projectEnd = Project::find($id)->date_end;
+        $this->updateProjectId = $id;
+        $this->buttonProject = 'Update Project';
+    }
 
     public function deleteProject($id){
         Project::find($id)->delete();
@@ -186,6 +194,17 @@ class ProjectComponent extends Component
     public function goToTasks($projectId){
         $this->activeProject = $projectId;
         $this->activeProjectData = Project::find($projectId);
+        $this->projectName = '';
+        $this->projectStart = '';
+        $this->projectEnd = '';
+        $this->buttonProject = 'Add Project';
+        
+        $this->taskName = '';
+        $this->taskStart = '';
+        $this->taskEnd = '';
+        $this->taskDoer = '';
+        $this->button = 'Add task';
+        $this->updateTaskId = null;
     }
 
 
