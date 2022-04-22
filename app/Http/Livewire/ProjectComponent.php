@@ -46,6 +46,12 @@ class ProjectComponent extends Component
                 'project_id'=>$this->activeProject,
                 // 'description' => 
             ]);
+            $this->taskName ='';
+            $this->taskStart = '';
+            $this->taskEnd = '';
+            $this->taskDoer = '';
+            $this->button = 'Add task';
+            $this->updateTaskId = null;
         }else{
             $task = Task::updateOrCreate(['id'=>$this->updateTaskId],[
                 'user_id'=>$this->taskDoer,
@@ -55,6 +61,12 @@ class ProjectComponent extends Component
                 'project_id'=>$this->projectId,
                 // 'description' => 
             ]);
+            $this->taskName ='';
+            $this->taskStart = '';
+            $this->taskEnd = '';
+            $this->taskDoer = '';
+            $this->button = 'Add task';
+            $this->updateTaskId = null;
         }
 
         $this->taskName = '';
@@ -113,8 +125,17 @@ class ProjectComponent extends Component
     }
 
     public function completeProject($id){
-        Project::find($id)->update(['status'=>1]);
-        session()->flash('project','Project completed successfully.');
+        if(Project::find($id)->status == 1){
+            Project::find($id)->update([
+                'status'=>0
+            ]);
+        }else{
+            Project::find($id)->update([
+                'status'=>1
+            ]);
+        }
+        $this->activeProjectData = Project::find($id);
+//            session()->flash('project','Project completed successfully.');
     }
 
     // public function editProject($id){

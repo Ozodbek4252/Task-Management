@@ -79,7 +79,7 @@
                                             <br>
                                                 <?php
                                                         $day = (strtotime($projects[$i]->date_end) - strtotime($projects[$i]->date_start))/86400;
-                                                        $day_left = intval(((strtotime($projects[$i]->date_end) - time()))/86400);
+                                                        $day_left = round(((strtotime($projects[$i]->date_end) - time()))/86400);
                                                 ?>
                                                 <div wire:click="goToTasks({{ $projects[$i]->id }})" style="cursor: pointer; ">
                                                     <div class="project external-event @if($day_left <= 3)  bg-danger  @elseif($day_left > 3 && $day_left < 7) bg-warning @else bg-success @endif text-white" data-class="bg-danger" style="{{$activeProject == $projects[$i]->id ? 'background-color: rgb(187 247 208); box-shadow: 0 2px 8px 0 rgba(10, 10, 10, 10), 0 1px 2px 0 rgba(0, 0, 0, 0.06); ' : ''}};" >
@@ -105,7 +105,7 @@
                                                 <br>
                                                 <?php
                                                 $day = (strtotime($projects[$i]->date_end) - strtotime($projects[$i]->date_start))/86400;
-                                                $day_left = intval(((strtotime($projects[$i]->date_end) - time()))/86400);
+                                                $day_left = round(((strtotime($projects[$i]->date_end) - time()))/86400);
                                                 ?>
                                                 <div wire:click="goToTasks({{ $projects[$i]->id }})" style="cursor: pointer; ">
                                                     <div class="project external-event @if($day_left <= 3)  bg-danger  @elseif($day_left > 3 && $day_left < 7) bg-warning @else bg-success @endif text-white" data-class="bg-danger" style="{{$activeProject == $projects[$i]->id ? 'background-color: rgb(187 247 208); box-shadow: 0 2px 8px 0 rgba(10, 10, 10, 10), 0 1px 2px 0 rgba(0, 0, 0, 0.06); ' : ''}};" >
@@ -190,9 +190,17 @@
                                                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center;">
                                                                 <div style="display: flex; align-items: center;">
                                                                     <h3>{{$activeProjectData->name}} | </h3>
-                                                                    <span class="ml-2">{{ intval((strtotime($activeProjectData->date_end) - time())/86400) }} days left</span></div>
+                                                                    <span class="ml-2">{{ round((strtotime($activeProjectData->date_end) - time())/86400) }} days left</span></div>
                                                                 <div style="width: 150px;">
-                                                                    <span wire:click="completeProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-rounded btn-success"><i class="bx bx-check"></i></button></span>
+                                                                    <span wire:click="completeProject({{$activeProjectData->id}})" class="mr-1">
+                                                                        <button class="btn btn-rounded btn-success">
+                                                                            @if($activeProjectData->status == 1)
+                                                                                <i class="bx bx-check-double"></i>
+                                                                            @else
+                                                                                <i class="bx bx-check"></i>
+                                                                            @endif
+                                                                        </button>
+                                                                    </span>
                                                                     <span wire:click="editProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-rounded btn-warning"><i class="uil-pen"></i></button></span>
                                                                     <span wire:click="deleteProject({{$activeProjectData->id}})" class="mr-1"><button class="btn btn-rounded btn-danger"><i class="uil-trash"></i></button></span>
                                                                 </div>
@@ -221,7 +229,15 @@
                                                                                 <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
                                                                                 <td>{{$tasks[$i]->date_start}} - {{ $tasks[$i]->date_end }}</td>
                                                                                 <td style="width: 160px;">
-                                                                                    <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
+                                                                                    <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1">
+                                                                                        <button class="btn btn-success">
+                                                                                            @if($activeProjectData->tasks[$i]->status == 1)
+                                                                                                <i class="bx bx-check-double"></i>
+                                                                                            @else
+                                                                                                <i class="bx bx-check"></i>
+                                                                                            @endif
+                                                                                        </button>
+                                                                                    </span>
                                                                                     <span wire:click="editTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
                                                                                     <span wire:click="deleteTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                                 </td>
@@ -247,7 +263,14 @@
                                                                                 <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
                                                                                 <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
                                                                                 <td style="width: 160px;">
-                                                                                    <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
+                                                                                    <span wire:click="completeTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1">
+                                                                                        <button class="btn btn-success">
+                                                                                            @if($activeProjectData->tasks[$i]->status == 1)
+                                                                                                <i class="bx bx-check-double"></i>
+                                                                                            @else
+                                                                                                <i class="bx bx-check"></i>
+                                                                                            @endif
+                                                                                        </button></span>
                                                                                     <span wire:click="editTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
                                                                                     <span wire:click="deleteTask({{$activeProjectData->tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                                 </td>
@@ -273,7 +296,15 @@
                                                                                 <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
                                                                                 <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
                                                                                 <td style="width: 160px;">
-                                                                                    <span wire:click="completeTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
+                                                                                    <span wire:click="completeTask({{$tasks[$i]->id}})" class="mr-1">
+                                                                                        <button class="btn btn-success">
+                                                                                            @if($tasks[$i]->status == 1)
+                                                                                                <i class="bx bx-check-double"></i>
+                                                                                            @else
+                                                                                                <i class="bx bx-check"></i>
+                                                                                            @endif
+                                                                                        </button>
+                                                                                    </span>
                                                                                     <span wire:click="editTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
                                                                                     <span wire:click="deleteTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                                 </td>
@@ -298,7 +329,15 @@
                                                                                 <td><i class="fas fa-user-clock"></i>{{ \App\Models\User::find($tasks[$i]->user_id)->name }}</td>
                                                                                 <td>{{$tasks[$i]->date_start}} - {{$tasks[$i]->date_end}}</td>
                                                                                 <td style="width: 160px;">
-                                                                                    <span wire:click="completeTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-success"><i class="bx bx-check"></i></button></span>
+                                                                                    <span wire:click="completeTask({{$tasks[$i]->id}})" class="mr-1">
+                                                                                        <button class="btn btn-success">
+                                                                                            @if($tasks[$i]->status == 1)
+                                                                                                <i class="bx bx-check-double"></i>
+                                                                                            @else
+                                                                                                <i class="bx bx-check"></i>
+                                                                                            @endif
+                                                                                        </button>
+                                                                                    </span>
                                                                                     <span wire:click="editTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-warning"><i class="uil-pen"></i></button></span>
                                                                                     <span wire:click="deleteTask({{$tasks[$i]->id}})" class="mr-1"><button class="btn btn-danger"><i class="uil-trash"></i></button></span>
                                                                                 </td>
